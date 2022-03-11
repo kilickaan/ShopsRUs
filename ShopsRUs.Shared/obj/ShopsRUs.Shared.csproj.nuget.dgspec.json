@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs\\ShopsRUs.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs\\ShopsRUs.csproj": {
+    "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs\\ShopsRUs.csproj",
-        "projectName": "ShopsRUs",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs\\ShopsRUs.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj",
+        "projectName": "ShopsRUs.Shared",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,20 +39,6 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "dependencies": {
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            },
-            "MongoDB.Driver": {
-              "target": "Package",
-              "version": "[2.15.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
