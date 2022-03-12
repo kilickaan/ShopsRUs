@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using ShopsRUs.Dtos;
 using ShopsRUs.Models;
+using ShopsRUs.Services.Interfaces;
 using ShopsRUs.Settings;
 using ShopsRUs.Shared.Dtos;
 using System;
@@ -18,7 +19,7 @@ namespace ShopsRUs.Services
 
         public InvoiceService(IMapper mapper, IDatabaseSettings databaseSettings)
         {
-            var client = new MongoClient(databaseSettings.ConnectionString);
+            var client = new MongoClient(databaseSettings.ConnectionStrings);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
             _invoiceCollection = database.GetCollection<Invoice>(databaseSettings.InvoiceCollectionName);

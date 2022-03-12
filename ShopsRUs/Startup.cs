@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ShopsRUs.Services;
+using ShopsRUs.Services.Interfaces;
 using ShopsRUs.Settings;
 
 namespace ShopsRUs
@@ -30,8 +31,11 @@ namespace ShopsRUs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IDiscountService, DiscountService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
+            services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"));
             services.AddSingleton<IDatabaseSettings>(sp =>
             {
                 var val = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;

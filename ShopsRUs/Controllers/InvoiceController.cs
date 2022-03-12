@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShopsRUs.Dtos;
 using ShopsRUs.Services;
+using ShopsRUs.Services.Interfaces;
 using ShopsRUs.Shared.ControllerBases;
 using System;
 using System.Collections.Generic;

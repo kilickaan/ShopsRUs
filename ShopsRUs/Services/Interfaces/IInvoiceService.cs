@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopsRUs.Services
+namespace ShopsRUs.Services.Interfaces
 {
     public interface IInvoiceService
     {
-
         Task<Response<List<InvoiceDto>>> GetAllAsync();
         Task<Response<InvoiceDto>> CreateAsync(InvoiceDto invoiceDto);
     }
