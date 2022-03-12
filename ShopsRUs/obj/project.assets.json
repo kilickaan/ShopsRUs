@@ -372,6 +372,19 @@
             "rid": "win"
           }
         }
+      },
+      "ShopsRUs.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/ShopsRUs.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ShopsRUs.Shared.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -1036,12 +1049,18 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "ShopsRUs.Shared/1.0.0": {
+      "type": "project",
+      "path": "../ShopsRUs.Shared/ShopsRUs.Shared.csproj",
+      "msbuildProject": "../ShopsRUs.Shared/ShopsRUs.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "MongoDB.Driver >= 2.15.0",
+      "ShopsRUs.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -1071,7 +1090,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\ShopsRUs\\ShopsRUs.Shared\\ShopsRUs.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

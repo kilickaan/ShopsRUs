@@ -10,7 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using ShopsRUs.Services;
+using ShopsRUs.Settings;
 
 namespace ShopsRUs
 {
@@ -26,8 +29,14 @@ namespace ShopsRUs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
+            services.AddSingleton<IDatabaseSettings>(sp =>
+            {
+                var val = sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+                return val;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShopsRUs", Version = "v1" });

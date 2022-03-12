@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShopsRUs.Dtos;
+using ShopsRUs.Services;
+using ShopsRUs.Shared.ControllerBases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +12,27 @@ namespace ShopsRUs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InvoiceController : ControllerBase
+    public class InvoiceController : CustomBaseController
     {
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateInvoice()
+        private readonly IInvoiceService _invoiceService;
+
+        public InvoiceController(IInvoiceService invoiceService)
         {
+            _invoiceService = invoiceService;
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var categories = await _invoiceService.GetAllAsync();
+            return CreateActionResultInstance(categories);
+        }
 
-            return Ok("Invoice Has Been Created");
+        [HttpPost]
+        public async Task<IActionResult> Create(InvoiceDto invoiceDto)
+        {
+            var response = await _invoiceService.CreateAsync(invoiceDto);
+            return CreateActionResultInstance(response);
         }
     }
 }

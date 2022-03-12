@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mapper\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\ShopsRUs.Shared\ShopsRUs.Shared.csproj" />
   </ItemGroup>
 
 </Project>
