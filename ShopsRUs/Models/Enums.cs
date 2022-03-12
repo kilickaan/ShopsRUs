@@ -14,10 +14,19 @@ namespace ShopsRUs.Models
             Customer = 3
         }
 
-        public enum ApplyFor
+        public enum DiscountTypes
         {
-            Default = 1,
-            Groceries = 2
+            GroceryDiscount = 1,
+            EmployeeDiscount = 2,
+            AffiliateDiscount = 3,
+            CustomerOver2YearDiscount = 4,
+            DefaultCustomerDiscount = 5
+        }
+
+        public enum ProductType
+        {
+            Groceries = 1,
+            Others = 2
         }
 
         public enum DiscountPercentage
@@ -25,7 +34,7 @@ namespace ShopsRUs.Models
             EmployeeDiscount = 30,
             AffiliateDiscount = 10,
             CustomerOver2YearDiscount = 5,
-            Each100DollarDiscount = 5
+            GroceryCustomerDiscount = 0
         }
     }
 }

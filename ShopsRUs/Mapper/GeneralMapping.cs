@@ -14,6 +14,7 @@ namespace ShopsRUs.Mapper
             CreateMap<InvoiceLine, InvoiceLineDto>().ReverseMap();
             CreateMap<Discount, DiscountDto>().ReverseMap();
             CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }

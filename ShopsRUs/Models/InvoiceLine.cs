@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +9,8 @@ namespace ShopsRUs.Models
 {
     public class InvoiceLine
     {
-        public string ItemName { get; set; } 
-        public string Quantity { get; set; }
-        public string UnitPrice { get; set; }
-        public string PriceAmount { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

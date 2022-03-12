@@ -15,6 +15,9 @@ namespace ShopsRUs.Services
     public class InvoiceService : IInvoiceService
     {
         private readonly IMongoCollection<Invoice> _invoiceCollection;
+        private readonly IMongoCollection<Discount> _discountCollection;
+        private readonly IMongoCollection<Customer> _customerCollection;
+        private readonly IMongoCollection<Product> _productCollection;
         private readonly IMapper _mapper;
 
         public InvoiceService(IMapper mapper, IDatabaseSettings databaseSettings)
@@ -23,6 +26,9 @@ namespace ShopsRUs.Services
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
             _invoiceCollection = database.GetCollection<Invoice>(databaseSettings.InvoiceCollectionName);
+            _discountCollection = database.GetCollection<Discount>(databaseSettings.DiscountCollectionName);
+            _customerCollection = database.GetCollection<Customer>(databaseSettings.CustomerCollectionName);
+            _productCollection = database.GetCollection<Product>(databaseSettings.ProductCollectionName);
 
             _mapper = mapper;
         }
@@ -37,6 +43,19 @@ namespace ShopsRUs.Services
         public async Task<Response<InvoiceDto>> CreateAsync(InvoiceDto invoiceDto)
         {
             var invoice = _mapper.Map<Invoice>(invoiceDto);
+
+            //var product = await
+
+            var customer = await _customerCollection.Find<Customer>(x => x.Id == invoice.CustomerId).FirstAsync();
+
+            var discount = await _discountCollection.Find<Discount>(x => x.Id == customer.UserTypeId).FirstAsync();
+
+            var discountAmount = invoice.PayableAmount * discount.DiscountRate / 100;
+
+            invoice.PayableAmount = Convert.ToDouble(invoice.PayableAmount) - Convert.ToDouble(discountAmount);
+
+            invoice.AllowanceAmount = discountAmount;
+
             await _invoiceCollection.InsertOneAsync(invoice);
 
             return Response<InvoiceDto>.Success(_mapper.Map<InvoiceDto>(invoice), 200);

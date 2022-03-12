@@ -10,6 +10,7 @@ namespace ShopsRUs.Settings
         public string InvoiceCollectionName { get; set; }
         public string DiscountCollectionName { get; set; }
         public string CustomerCollectionName { get; set; }
+        public string ProductCollectionName { get; set; }
         public string ConnectionStrings { get; set; }
         public string DatabaseName { get; set; }
     }

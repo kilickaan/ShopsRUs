@@ -7,14 +7,20 @@ using System.Threading.Tasks;
 
 namespace ShopsRUs.Models
 {
+
     public class Invoice
     {
+       
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string InvoiceId { get; set; }
-        public string AllowanceAmount { get; set; }
-        public string PayableAmount { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string CustomerId { get; set; }
+        public double AllowanceAmount { get; set; }
+        public int AllowancePercentage { get; set; }
+        public double PayableAmount { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public List<InvoiceLine> InvoiceLine { get; set; }
     }

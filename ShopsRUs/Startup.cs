@@ -33,6 +33,7 @@ namespace ShopsRUs
             services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"));

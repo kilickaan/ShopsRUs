@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace ShopsRUs.Models
 {
-    public class Discount
+    public class Product
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public int DiscountType { get; set; }
-        public int DiscountRate { get; set; }
+        public string ProductName { get; set; }
+        public double ProductPrice { get; set; }
+        public int ProductType { get; set; }
     }
 }

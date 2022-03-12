@@ -10,7 +10,7 @@ namespace ShopsRUs.Dtos
         public string Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string UserType { get; set; }
-        public string CreatedOn { get; set; }
+        public string UserTypeId { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
     }
 }
