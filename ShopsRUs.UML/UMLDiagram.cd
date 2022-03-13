@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShopsRUs.UML.Models.Customer">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAAAAAAQAAAAAAAAACAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserTypeId" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ShopsRUs.UML.Models.Discount">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Discount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShopsRUs.UML.Models.Enums">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="ShopsRUs.UML.Models.Enums.DiscountPercentage">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="ShopsRUs.UML.Models.Enums.DiscountTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="ShopsRUs.UML.Models.Enums.ProductType">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="ShopsRUs.UML.Models.Enums.UserTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShopsRUs.UML.Models.Invoice">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACICAAAAAAAAAAAAAAAAAgAACCABAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\Invoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="CustomerId" />
+      <Property Name="lineid" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ShopsRUs.UML.Models.InvoiceLine">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgA=</HashCode>
+      <FileName>Models\InvoiceLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProductId" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ShopsRUs.UML.Models.Product">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
