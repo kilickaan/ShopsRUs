@@ -55,7 +55,7 @@ ________
 {
   "username": "Iron Man",
   "password": "TonyStark",
-  "userTypeId": "Write the discountId here (Find it from DiscountCollection)",
+  "userTypeId": "Write te discount type here (Find it from DiscountCollection)",
   "createdOn": "2022-03-13T12:07:37.439Z"
 }
 ````
@@ -63,14 +63,14 @@ ________
 ````
 {
   "invoiceId": "ABC202200000000001",
-  "customerId": "Write the customerId here (Find it from CustomerCollection)",
+  "customerId": "Write te customerIde here (Find it from CustomerCollection)",
   "allowanceAmount": 0,
   "allowancePercentage": 0,
   "payableAmount": 0,
   "createdOn": "2022-03-13T12:11:41.175Z",
   "invoiceLine": [
     {
-      "productId": "Write the ProductId here (Find it from ProductCollection)",
+      "productId": "Write te ProductId here (Find it from ProductCollection)",
       "quantity": 0
     }
   ]
