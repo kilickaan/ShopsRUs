@@ -29,18 +29,32 @@ namespace ShopsRUs.Services
 
         public async Task<Response<List<CustomerDto>>> GetAllAsync()
         {
-            var customers = await _customerCollection.Find(customer => true).ToListAsync();
+            try
+            {
+                var customers = await _customerCollection.Find(customer => true).ToListAsync();
 
-            return Response<List<CustomerDto>>.Success(_mapper.Map<List<CustomerDto>>(customers), 200);
+                return Response<List<CustomerDto>>.Success(_mapper.Map<List<CustomerDto>>(customers), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<List<CustomerDto>>.Fail("Error Message: " + ex.Message, 500);
+            }
         }
 
         public async Task<Response<CustomerDto>> CreateAsync(CustomerDto customerDto)
         {
-            var customer = _mapper.Map<Customer>(customerDto);
-            await _customerCollection.InsertOneAsync(customer);
+            try
+            {
+                var customer = _mapper.Map<Customer>(customerDto);
+                await _customerCollection.InsertOneAsync(customer);
 
-            return Response<CustomerDto>.Success(_mapper.Map<CustomerDto>(customer), 200);
+                return Response<CustomerDto>.Success(_mapper.Map<CustomerDto>(customer), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<CustomerDto>.Fail("Error Message: " + ex.Message, 500);
+            }
+
         }
-
     }
 }

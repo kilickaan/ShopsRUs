@@ -29,17 +29,32 @@ namespace ShopsRUs.Services
 
         public async Task<Response<List<DiscountDto>>> GetAllAsync()
         {
-            var discounts = await _discountCollection.Find(discount => true).ToListAsync();
+            try
+            {
+                var discounts = await _discountCollection.Find(discount => true).ToListAsync();
 
-            return Response<List<DiscountDto>>.Success(_mapper.Map<List<DiscountDto>>(discounts), 200);
+                return Response<List<DiscountDto>>.Success(_mapper.Map<List<DiscountDto>>(discounts), 200);
+            }
+            catch (Exception ex)
+            {
+
+                return Response<List<DiscountDto>>.Fail("Error Message: " + ex.Message, 500);
+            }
         }
 
         public async Task<Response<DiscountDto>> CreateAsync(DiscountDto discountDto)
         {
-            var discount = _mapper.Map<Discount>(discountDto);
-            await _discountCollection.InsertOneAsync(discount);
+            try
+            {
+                var discount = _mapper.Map<Discount>(discountDto);
+                await _discountCollection.InsertOneAsync(discount);
 
-            return Response<DiscountDto>.Success(_mapper.Map<DiscountDto>(discount), 200);
+                return Response<DiscountDto>.Success(_mapper.Map<DiscountDto>(discount), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<DiscountDto>.Fail("Error Message: " + ex.Message, 500);
+            }
         }
 
 

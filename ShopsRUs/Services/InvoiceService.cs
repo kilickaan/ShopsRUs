@@ -35,30 +35,127 @@ namespace ShopsRUs.Services
 
         public async Task<Response<List<InvoiceDto>>> GetAllAsync()
         {
-            var invoices = await _invoiceCollection.Find(invoice => true).ToListAsync();
+            try
+            {
+                var invoices = await _invoiceCollection.Find(invoice => true).ToListAsync();
 
-            return Response<List<InvoiceDto>>.Success(_mapper.Map<List<InvoiceDto>>(invoices), 200);
+                return Response<List<InvoiceDto>>.Success(_mapper.Map<List<InvoiceDto>>(invoices), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<List<InvoiceDto>>.Fail("Error Message: " + ex.Message, 500);
+            }
         }
 
         public async Task<Response<InvoiceDto>> CreateAsync(InvoiceDto invoiceDto)
         {
-            var invoice = _mapper.Map<Invoice>(invoiceDto);
+            try
+            {
+                var invoice = _mapper.Map<Invoice>(invoiceDto);
 
-            //var product = await
+                var customer = await _customerCollection.Find<Customer>(x => x.Id == invoice.CustomerId).FirstAsync();
 
-            var customer = await _customerCollection.Find<Customer>(x => x.Id == invoice.CustomerId).FirstAsync();
+                var discount = await _discountCollection.Find<Discount>(x => x.Id == customer.UserTypeId).FirstAsync();
 
-            var discount = await _discountCollection.Find<Discount>(x => x.Id == customer.UserTypeId).FirstAsync();
+                var products = await _productCollection.Find(product => true).ToListAsync();
 
-            var discountAmount = invoice.PayableAmount * discount.DiscountRate / 100;
+                double TotalAmount = 0.0;
+                double totalDiscount = 0.0;
 
-            invoice.PayableAmount = Convert.ToDouble(invoice.PayableAmount) - Convert.ToDouble(discountAmount);
+                foreach (var line in invoice.InvoiceLine)
+                {
+                    foreach (var product in products)
+                    {
+                        if (product.Id == line.ProductId)
+                        {
+                            double quantity = Convert.ToDouble(line.Quantity);
 
-            invoice.AllowanceAmount = discountAmount;
+                            if (quantity > 0)
+                            {
+                                double price = 0;
+                                double discountAmount = 0;
+                                double lineAmount = 0;
 
-            await _invoiceCollection.InsertOneAsync(invoice);
+                                //There is no discount for groceries
+                                if (product.ProductType == (int)Enums.ProductType.Groceries)
+                                {
 
-            return Response<InvoiceDto>.Success(_mapper.Map<InvoiceDto>(invoice), 200);
+                                    price = product.ProductPrice;
+                                    discountAmount = 0.0;
+
+                                    lineAmount = quantity * price;
+                                    totalDiscount += 0;
+                                    TotalAmount += lineAmount;
+                                    totalDiscount += 0;
+                                }
+                                else if (product.ProductType == (int)Enums.ProductType.Others) //Others have discount types
+                                {
+
+                                    if (discount.DiscountType == (int)Enums.UserTypes.Employee) // 30% Discount
+                                    {
+
+                                        discountAmount = product.ProductPrice * Convert.ToDouble(discount.DiscountRate / 100);
+                                        price = product.ProductPrice - discountAmount;
+                                    }
+                                    else if (discount.DiscountType == (int)Enums.UserTypes.Affiliate) // 10% Discount
+                                    {
+                                        discountAmount = product.ProductPrice * Convert.ToDouble(discount.DiscountRate / 100);
+                                        price = product.ProductPrice - discountAmount;
+                                    }
+                                    else if (discount.DiscountType == (int)Enums.UserTypes.Customer)
+                                    {
+                                        if (customer.CreatedOn.AddYears(2) < DateTime.Now)
+                                        {
+
+                                            discount.DiscountRate = 5;
+                                            discountAmount = product.ProductPrice * 5 / 100;
+                                            price = product.ProductPrice - discountAmount;
+                                        }
+                                        else
+                                        {
+                                            int multiplier = Convert.ToInt32(product.ProductPrice) / 100;
+                                            if (multiplier > 0)
+                                            {
+                                                discount.DiscountRate = multiplier * 5;
+                                                discountAmount = product.ProductPrice * multiplier * 5 / 100;
+                                                price = product.ProductPrice - discountAmount;
+                                            }
+                                        }
+
+                                    }
+
+                                    lineAmount = quantity * price;
+                                    TotalAmount += lineAmount;
+                                    totalDiscount += quantity * discountAmount;
+                                }
+                                else
+                                {
+                                    return Response<InvoiceDto>.Fail("Wrong Product Type Value", 404);
+                                }
+                            }
+                            else
+                            {
+                                return Response<InvoiceDto>.Fail("Wrong Quantity Value", 404);
+                            }
+                        }
+                    }
+                }
+
+
+                invoice.PayableAmount = Math.Round(TotalAmount, 2);
+
+                invoice.AllowanceAmount = Math.Round(totalDiscount, 2);
+
+                invoice.AllowancePercentage = Math.Round(totalDiscount / (TotalAmount + totalDiscount) * 100, 2);
+
+                await _invoiceCollection.InsertOneAsync(invoice);
+
+                return Response<InvoiceDto>.Success(_mapper.Map<InvoiceDto>(invoice), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<InvoiceDto>.Fail("Error Message: " + ex.Message, 500);
+            }
         }
 
     }

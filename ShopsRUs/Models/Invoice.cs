@@ -19,7 +19,7 @@ namespace ShopsRUs.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string CustomerId { get; set; }
         public double AllowanceAmount { get; set; }
-        public int AllowancePercentage { get; set; }
+        public double AllowancePercentage { get; set; }
         public double PayableAmount { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public List<InvoiceLine> InvoiceLine { get; set; }
