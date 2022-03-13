@@ -59,7 +59,7 @@ ________
   "createdOn": "2022-03-13T12:07:37.439Z"
 }
 ````
-- Add Invoice using CustomerId and ProductIds
+- Add Invoice using CustomerId and ProductIds (Dont forget to add quantity of the product)
 ````
 {
   "invoiceId": "ABC202200000000001",
