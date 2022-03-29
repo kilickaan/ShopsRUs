@@ -47,7 +47,7 @@ ________
 {
   "productName": "Laptop",
   "productPrice": 1000,
-  "productType": 0 
+  "productType": 2 
 }
 ````
 - Add Customer via Swagger
