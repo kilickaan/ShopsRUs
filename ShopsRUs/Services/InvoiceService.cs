@@ -94,12 +94,12 @@ namespace ShopsRUs.Services
                                     if (discount.DiscountType == (int)Enums.UserTypes.Employee) // 30% Discount
                                     {
 
-                                        discountAmount = product.ProductPrice * Convert.ToDouble(discount.DiscountRate / 100);
+                                        discountAmount = product.ProductPrice * discount.DiscountRate / 100;
                                         price = product.ProductPrice - discountAmount;
                                     }
                                     else if (discount.DiscountType == (int)Enums.UserTypes.Affiliate) // 10% Discount
                                     {
-                                        discountAmount = product.ProductPrice * Convert.ToDouble(discount.DiscountRate / 100);
+                                        discountAmount = product.ProductPrice * discount.DiscountRate / 100;
                                         price = product.ProductPrice - discountAmount;
                                     }
                                     else if (discount.DiscountType == (int)Enums.UserTypes.Customer)
